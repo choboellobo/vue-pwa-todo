@@ -13,4 +13,5 @@ export default {
 <style lang="scss">
   @import url('../node_modules/materialize-css/dist/css/materialize.css');
   @import url('../node_modules/animate.css/animate.css');
+  @import 'helpers';
 </style>

@@ -1,6 +1,7 @@
 <template lang="pug">
-  div
-    span soy el login
+  div.main.flex.vertical-center.horizontal-center
+    button.waves-effect.waves-light.btn.red.darken-3
+      span ACCEDE CON GOOGLE
 </template>
 
 <script>
