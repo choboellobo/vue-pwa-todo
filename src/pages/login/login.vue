@@ -1,14 +1,35 @@
 <template lang="pug">
   div.main.flex.vertical-center.horizontal-center
-    button.waves-effect.waves-light.btn.red.darken-3
+    button.waves-effect.waves-light.btn.red.darken-3(@click="signIn" v-if="!loading")
       span ACCEDE CON GOOGLE
-    Loading
+    Loading(v-if="loading")
 </template>
 
 <script>
+import {mapGetters} from 'vuex';
 import Loading from '../../components/Loading/Loading.vue'
 export default {
-  components: {Loading}
+  components: {Loading},
+  computed: mapGetters(['getUserData']),
+  data() {
+    return {
+      loading: false
+    }
+  },
+  methods: {
+        signIn() {
+          this.loading = true;
+          let provider = new this.$firebase.auth.GoogleAuthProvider();
+          this.$firebase.auth().signInWithPopup(provider)
+          .then(res => {
+            console.log(res)
+            this.$router.push({name: 'Main'})
+            this.loading = false
+          })
+          .catch(error => this.loading = false)
+        }
+    }
+
 }
 </script>
 
