@@ -5,8 +5,27 @@
 </template>
 
 <script>
+import {mapMutations, mapGetters} from 'vuex'
 export default {
-  name: 'app'
+  name: 'app',
+  data() {
+    return {
+      userUid: null
+    }
+  },
+  mounted() {
+
+    this.$firebase.auth().onAuthStateChanged((user) => {
+      if(user) {
+        this.userUid = user.uid
+        this.setUserData(user);
+        //this.$router.push({name: 'Main'})
+      } else this.$router.push({name: 'Login'})
+    })
+  },
+  methods: {
+    ...mapMutations(['setUserData'])
+  }
 }
 </script>
 

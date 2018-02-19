@@ -7,9 +7,7 @@
 
 <script>
 import {mapGetters} from 'vuex';
-import Loading from '../../components/Loading/Loading.vue'
 export default {
-  components: {Loading},
   computed: mapGetters(['getUserData']),
   data() {
     return {

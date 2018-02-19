@@ -22,6 +22,9 @@ Vue.prototype.$bus = bus;
 // Vuex
 import {store} from './store/store';
 
+// Components
+import './components/index';
+
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
