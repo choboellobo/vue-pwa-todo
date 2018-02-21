@@ -23,7 +23,8 @@ Vue.prototype.$bus = bus;
 import {store} from './store/store';
 
 // Components
-import './components/index';
+import Components from './components'
+Vue.use(Components)
 
 Vue.config.productionTip = false
 
