@@ -8,7 +8,7 @@
             li
               a
                 i.material-icons exit_to_app
-          
+
 </template>
 
 <script>
@@ -16,4 +16,4 @@ export default {
 }
 </script>
 
-<style src="./Navbar.scss" lang="scss" scoped=""></style>
+<style src="./Navbar.scss" lang="scss" scoped></style>

@@ -8,4 +8,4 @@ export default {
 }
 </script>
 
-<style src="./main.scss" lang="scss" scoped=""></style>
+<style src="./main.scss" lang="scss" scoped></style>
