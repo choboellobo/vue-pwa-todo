@@ -20,7 +20,10 @@ export default {
         this.userUid = user.uid
         this.setUserData(user);
         //this.$router.push({name: 'Main'})
-      } else this.$router.push({name: 'Login'})
+      } else {
+        this.setUserData(null)
+        this.$router.push({name: 'Login'})
+      }
     })
   },
   methods: {

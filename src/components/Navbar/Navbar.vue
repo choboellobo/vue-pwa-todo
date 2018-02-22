@@ -6,13 +6,21 @@
           span.title Esta de la compra
           ul.right
             li
-              a
+              a(@click="logout")
                 i.material-icons exit_to_app
 
 </template>
 
 <script>
 export default {
+  methods: {
+    logout() {
+      let cm = window.confirm('Desea salir de la aplicación')
+      if(cm) {
+        this.$firebase.auth().signOut()
+      }
+    }
+  }
 }
 </script>
 
