@@ -1,6 +1,8 @@
 <template lang="pug">
   div
     Navbar
+    //out of viewport
+    //Loading
 </template>
 
 <script>

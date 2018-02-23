@@ -2,6 +2,7 @@
   div.main.flex.vertical-center.horizontal-center
     button.waves-effect.waves-light.btn.red.darken-3(@click="signIn" v-if="!loading")
       span ACCEDE CON GOOGLE
+    // out of viewport
     Loading(v-if="loading")
 </template>
 
