@@ -15,6 +15,7 @@
         i.material-icons add
     //out of viewport
     //Loading
+    EmptyContent
 </template>
 
 <script>

@@ -1,7 +1,10 @@
-.nav-wrapper{
-  .title{
-    margin-left: 1.5em;
-    
-    
+.nav-fixed{
+  z-index: 990;
+  .nav-wrapper{
+    .title{
+      margin-left: 1.5em;
+      
+      
+    }
   }
 }
