@@ -3,7 +3,7 @@
     .navbar-fixed
       nav.indigo.darken-1
         .nav-wrapper
-          span.title Esta de la compra
+          span.title Lista de la compra
           ul.right
             li
               a(@click="logout")
