@@ -15,7 +15,7 @@
         i.material-icons add
     //out of viewport
     //Loading
-    EmptyContent
+    EmptyContent(icon="playlist_add" text="Añade una nueva lista")
 </template>
 
 <script>
