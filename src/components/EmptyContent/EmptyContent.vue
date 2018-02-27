@@ -1,6 +1,6 @@
 <template lang="pug">
   div
-    .flex.main
+    .flex.vertical-center.horizontal-center.main
         i.material-icons home
         span Añade una lista nueva
 </template>
