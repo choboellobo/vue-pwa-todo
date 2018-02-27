@@ -16,9 +16,8 @@ export default {
   methods: {
     logout() {
       let cm = window.confirm('Desea salir de la aplicación')
-      if(cm) {
-        this.$firebase.auth().signOut()
-      }
+      if(cm) this.$firebase.auth().signOut()
+
     }
   }
 }
