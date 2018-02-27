@@ -1,12 +1,12 @@
 <template lang="pug">
   div
-    .flex.vertical-center.horizontal-center.main
-        i.material-icons home
-        span Añade una lista nueva
+    .main.flex.vertical-center.horizontal-center.flex-column
+        i.material-icons {{icon}}
+        span {{text}}
 </template>
 <script>
 export default {
-  
+  props: ['icon', 'text']
 }
 </script>
 <style src="./EmptyContent.scss" lang="scss" scoped>
