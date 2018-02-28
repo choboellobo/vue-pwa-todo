@@ -15,12 +15,9 @@
       a.btn-floating.btn-large.indigo.darken-1
         i.material-icons add
 
-    // Out of viewport
-    //- If there is not wallets
-    Loading(v-if="!wallets")
-    //- If there is not wallets or wallets length is equal to 0
-    EmptyContent(v-if="wallets.length == 0 || !wallets")
-
+    //out of viewport
+    Loading(v-if="loading")
+    EmptyContent(icon="playlist_add" text="Añade una nueva lista" v-if="wallets.length == 0 && !loading")
 </template>
 
 <script>
@@ -43,8 +40,9 @@ export default {
   },
   data() {
     return {
+      loading: true,
       db: null,
-      wallets: null,
+      wallets: [],
       modalAddWallet: null,
       walletModel: {name: ''}
     }
@@ -54,6 +52,7 @@ export default {
     this.db = this.$firebase.database();
     this.db.ref('/users/'+ user +'/wallets')
       .on('value', snapshot => {
+        this.loading = false
         this.wallets = []
         let wallets = snapshot.val()
         if(wallets) this.getUserWallets(wallets)
