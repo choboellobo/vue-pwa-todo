@@ -52,7 +52,6 @@ export default {
     this.db = this.$firebase.database();
     this.db.ref('/users/'+ user +'/wallets')
       .on('value', snapshot => {
-        this.loading = false
         this.wallets = []
         let wallets = snapshot.val()
         if(wallets) this.getUserWallets(wallets)
@@ -85,6 +84,7 @@ export default {
       walletArray.forEach(wallet => {
         this.db.ref('/wallets/'+ wallet).once('value', snapshot => {
             this.wallets.push(Object.assign({key: wallet}, snapshot.val()))
+            this.loading = false
         });
       })
     },
