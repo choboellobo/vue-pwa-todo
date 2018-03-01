@@ -55,6 +55,8 @@ export default {
         this.wallets = []
         let wallets = snapshot.val()
         if(wallets) this.getUserWallets(wallets)
+        else this.loading = false
+
       })
   },
   methods: {
