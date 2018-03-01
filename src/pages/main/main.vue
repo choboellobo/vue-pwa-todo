@@ -12,10 +12,11 @@
                 a.secondary-content
                   i.material-icons more_vert
     Fab
-      a.btn-floating.btn-large.indigo.darken-1
+      button.btn-floating.btn-large.indigo.darken-1(@click="modalAddWallet.open()")
         i.material-icons add
 
     //out of viewport
+    Modal(@mounted="modalAddWallet = $event")
     Loading(v-if="loading")
     EmptyContent(icon="playlist_add" text="Añade una nueva lista" v-if="wallets.length == 0 && !loading")
 </template>
@@ -56,7 +57,6 @@ export default {
         let wallets = snapshot.val()
         if(wallets) this.getUserWallets(wallets)
         else this.loading = false
-
       })
   },
   methods: {
@@ -101,7 +101,7 @@ export default {
           Array.isArray(data) ? data.push(res.key) :  data = [res.key]
           return data
         })
-        Promise.all([promiseWallet, promiseUserWallet]).then(resolve => this.$materialize.Modal.getInstance(this.modalAddWallet).close())
+        Promise.all([promiseWallet, promiseUserWallet]).then(resolve => this.modalAddWallet.close() )
       })
     }
   }
