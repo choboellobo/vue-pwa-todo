@@ -1,6 +1,6 @@
 <template lang="pug">
   div
-    Navbar
+    Navbar(title="Lista de la compra")
     //- If there is more than 0 wallets
     .container(v-if="wallets.length > 0")
        .row
@@ -17,6 +17,10 @@
 
     //out of viewport
     Modal(@mounted="modalAddWallet = $event")
+      div(slot="content")
+        h1 hola mundo
+      div(slot="footer")
+        a.btn soy un boton
     Loading(v-if="loading")
     EmptyContent(icon="playlist_add" text="Añade una nueva lista" v-if="wallets.length == 0 && !loading")
 </template>

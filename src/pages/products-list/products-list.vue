@@ -1,5 +1,7 @@
 <template lang="pug">
-  div hola
+  div
+    Navbar(title="soy un título")
+
 </template>
 <script>
 export default {

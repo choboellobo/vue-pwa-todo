@@ -1,9 +1,10 @@
 <template lang="pug">
   .modal(ref="modal")
     .modal-content
-      h4 aquí el content
+      slot(name="content")
+      
     .modal-footer
-      a.btn.modal-close Cerrar
+      slot(name="footer")
 </template>
 
 <script>

@@ -3,7 +3,11 @@
     .navbar-fixed
       nav.indigo.darken-1
         .nav-wrapper
-          span.title Lista de la compra
+          ul.left
+            li
+              a
+                i.material-icons arrow_back 
+          span.title {{title}}
           ul.right
             li
               a(@click="logout")
@@ -13,6 +17,7 @@
 
 <script>
 export default {
+  props: ['title'],
   methods: {
     logout() {
       let cm = window.confirm('Desea salir de la aplicación')
