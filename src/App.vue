@@ -19,7 +19,6 @@ export default {
       if(user) {
         this.userUid = user.uid
         this.setUserData(user);
-        //this.$router.push({name: 'Main'})
       } else {
         this.setUserData(null)
         this.$router.push({name: 'Login'})

@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import {mapGetters} from 'vuex';
+import {mapGetters, mapMutations} from 'vuex';
 export default {
   computed: mapGetters(['getUserData']),
   data() {
@@ -16,12 +16,13 @@ export default {
     }
   },
   methods: {
+        ...mapMutations(['setUserData']),
         signIn() {
           this.loading = true;
           let provider = new this.$firebase.auth.GoogleAuthProvider();
           this.$firebase.auth().signInWithPopup(provider)
-          .then(res => {
-            console.log(res)
+          .then(user => {
+            this.setUserData(user);
             this.$router.push({name: 'Main'})
             this.loading = false
           })
