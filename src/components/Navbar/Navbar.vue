@@ -3,9 +3,9 @@
     .navbar-fixed
       nav.indigo.darken-1
         .nav-wrapper
-          ul.left
+          ul.left(v-if="backButton")
             li
-              a
+              a(@click="goBack")
                 i.material-icons arrow_back 
           span.title {{title}}
           ul.right
@@ -17,8 +17,14 @@
 
 <script>
 export default {
-  props: ['title'],
+  props: {
+    title: String,
+    backButton: {type: Boolean, default: false}
+  },
   methods: {
+    goBack() {
+      this.$router.go(-1);
+    },
     logout() {
       let cm = window.confirm('Desea salir de la aplicación')
       if(cm) this.$firebase.auth().signOut()

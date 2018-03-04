@@ -1,6 +1,6 @@
 <template lang="pug">
   div
-    Navbar(title="soy un título")
+    Navbar(title="soy un título" :backButton="true")
 
 </template>
 <script>
