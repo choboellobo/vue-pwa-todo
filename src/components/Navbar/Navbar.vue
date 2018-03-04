@@ -9,9 +9,10 @@
                 i.material-icons arrow_back 
           span.title {{title}}
           ul.right
-            li
-              a(@click="logout")
-                i.material-icons exit_to_app
+            slot
+              li
+                a(@click="logout")
+                  i.material-icons exit_to_app
 
 </template>
 
