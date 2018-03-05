@@ -7,8 +7,9 @@
          .col.s12
             ul.collection
               li.collection-item.avatar(v-for="wallet in wallets" )
-                span.title {{wallet.name}}
-                p Completados #[strong {{ wallet.tasks | taskDone }}] de #[strong {{ Object.keys(wallet.tasks).length }}]
+                div(@click="goToWallet(wallet)")
+                  .title {{wallet.name}}
+                  p Completados #[strong {{ wallet.tasks | taskDone }}] de #[strong {{ Object.keys(wallet.tasks).length }}]
                 a.secondary-content
                   i.material-icons more_vert
     Fab
@@ -65,7 +66,7 @@ export default {
   },
   methods: {
     goToWallet(wallet) {
-      this.$router.push({name: 'Wallet', params: {key: wallet.key}})
+      this.$router.push({name: 'ProductList', params: {key: wallet.key}})
     },
     shareWallet(key) {
       let url = window.location.origin + '/#/mix/' + key
