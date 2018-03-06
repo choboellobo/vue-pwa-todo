@@ -35,4 +35,8 @@ export default {
   @import url('../node_modules/materialize-css/dist/css/materialize.css');
   @import url('../node_modules/animate.css/animate.css');
   @import 'helpers';
-</style>
+  //global styles
+  .collection, .collection-item{
+    border:0 !important;
+  }
+  </style>
