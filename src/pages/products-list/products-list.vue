@@ -10,6 +10,10 @@
                 input(type="checkbox" :checked="task.completed")
                 span.completed {{task.name}}
               a.secondary-content #[i.material-icons more_vert]
+    //outviewport
+    Fab
+      a.btn-floating.red
+        i.large.material-icons delete_forever
 </template>
 <script>
 import {mapGetters, mapMutations} from 'vuex';
