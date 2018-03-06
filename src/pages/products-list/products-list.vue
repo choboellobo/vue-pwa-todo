@@ -11,8 +11,11 @@
                 span.completed {{task.name}}
               a.secondary-content #[i.material-icons more_vert]
     //outviewport
+    Fab.right-top-edge
+      a.btn-floating.blue.darken-1
+        i.large.material-icons add
     Fab
-      a.btn-floating.red
+      a.btn-floating.btn-large.red
         i.large.material-icons delete_forever
 </template>
 <script>

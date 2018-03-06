@@ -9,3 +9,6 @@ export default{
   
 }
 </script>
+<style src="./Fab.scss" lang="scss" scoped>
+
+</style>
