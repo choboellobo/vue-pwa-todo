@@ -14,10 +14,10 @@
     Fab.right-top-edge
       a.btn-floating.blue.darken-1
         i.large.material-icons add
-    Fab
+    Fab(v-if="wallet && wallet.tasks")
       a.btn-floating.btn-large.red
         i.large.material-icons delete_forever
-    EmptyContent(icon="add" text="Haz clik en el icono + para añadir productos a tu lista")
+    EmptyContent(v-if="wallet && !wallet.tasks" icon="add" text="Haz clik en el icono + para añadir productos a tu lista")
 </template>
 <script>
 import {mapGetters, mapMutations} from 'vuex';
