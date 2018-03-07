@@ -8,10 +8,10 @@
             li.collection-item(v-for="task in wallet.tasks")
               label
                 input(type="checkbox" :checked="task.completed")
-                span.completed {{task.name}}
+                span(:class="{'completed': task.completed}") {{task.name}}
               a.secondary-content #[i.material-icons more_vert]
     //outviewport
-    Loading
+    Loading(v-if="!wallet")
     Fab.right-top-edge
       a.btn-floating.blue.darken-1
         i.large.material-icons add
