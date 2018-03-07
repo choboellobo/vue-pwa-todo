@@ -9,7 +9,7 @@
               li.collection-item.avatar(v-for="wallet in wallets" )
                 div(@click="goToWallet(wallet)")
                   .title {{wallet.name}}
-                  p Completados #[strong {{ wallet.tasks | taskDone }}] de #[strong {{ Object.keys(wallet.tasks).length }}]
+                  p(v-if="wallet.tasks") Completados #[strong {{ wallet.tasks | taskDone }}] de #[strong {{ Object.keys(wallet.tasks).length }}]
                 a.secondary-content
                   i.material-icons more_vert
     Fab
@@ -91,9 +91,10 @@ export default {
       walletArray.forEach(wallet => {
         this.db.ref('/wallets/'+ wallet).once('value', snapshot => {
             this.wallets.push(Object.assign({key: wallet}, snapshot.val()))
-            this.loading = false
         });
       })
+      console.log(this.wallets)
+      this.loading = false
     },
     createWallet(){
       let promiseWallet = this.db.ref('wallets').push({

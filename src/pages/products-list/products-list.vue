@@ -1,8 +1,8 @@
 <template lang="pug">
   div
-    Navbar.hide-buttons-right(:title="wallet.name" :backButton="true")
-    .container
-      .row
+    Navbar.hide-buttons-right(:title="title" :backButton="true")
+    .container(v-if="wallet")
+      .row(v-if="wallet.tasks")
         .col.s12
           ul.collection
             li.collection-item(v-for="task in wallet.tasks")
@@ -25,6 +25,11 @@ export default {
     return {
       db: null,
       wallet: null
+    }
+  },
+  computed: {
+    title() {
+      return this.wallet ? this.wallet.name : ''
     }
   },
   mounted(){
