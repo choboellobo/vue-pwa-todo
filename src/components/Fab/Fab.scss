@@ -1,4 +1,12 @@
 .fixed-action-btn{
+    &.right{
+        position: absolute;
+        right: 2em;
+    }
+    &.top{
+        position: absolute;
+        top: 1.5em;
+    }
     &.right-top-edge{
         position: absolute;
         top: 1.5em;

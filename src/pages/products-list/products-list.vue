@@ -11,6 +11,7 @@
                 span.completed {{task.name}}
               a.secondary-content #[i.material-icons more_vert]
     //outviewport
+    Loading
     Fab.right-top-edge
       a.btn-floating.blue.darken-1
         i.large.material-icons add
