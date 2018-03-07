@@ -17,6 +17,7 @@
     Fab
       a.btn-floating.btn-large.red
         i.large.material-icons delete_forever
+    EmptyContent(icon="add" text="Haz clik en el icono + para añadir productos a tu lista")
 </template>
 <script>
 import {mapGetters, mapMutations} from 'vuex';
