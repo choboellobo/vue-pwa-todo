@@ -5,18 +5,18 @@
       .row(v-if="wallet.tasks")
         .col.s12
           ul.collection
-            li.collection-item(v-for="task in wallet.tasks")
+            li.collection-item(v-for="(task, key) in wallet.tasks")
               label
-                input(type="checkbox" :checked="task.completed")
-                span.completed {{task.name}}
+                input(type="checkbox" :checked="task.completed" @change="toggleTask(key)")
+                span(:class="{'completed': task.completed}") {{task.name}}
               a.secondary-content #[i.material-icons more_vert]
     //outviewport
-    Loading
+    Loading(v-if="!wallet")
     Fab.right-top-edge
       a.btn-floating.blue.darken-1
         i.large.material-icons add
-    Fab(v-if="wallet && wallet.tasks")
-      a.btn-floating.btn-large.red
+    Fab( v-if="wallet && wallet.tasks")
+      a.btn-floating.btn-large.red(@click="removeAllTasks")
         i.large.material-icons delete_forever
     EmptyContent(v-if="wallet && !wallet.tasks" icon="add" text="Haz clik en el icono + para añadir productos a tu lista")
 </template>
@@ -40,6 +40,19 @@ export default {
             .on('value', snapshot => {
                 this.wallet = snapshot.val()
             })
+  },
+  methods: {
+        removeAllTasks() {
+            let confirm = window.confirm("Desea borrar todas las tareas")
+            if(confirm) this.db.ref('/wallets/'+ this.$route.params.key + '/tasks').set([])
+        },
+        toggleTask(keyTask){
+            this.db.ref('/wallets/'+ this.$route.params.key + '/tasks/'+ keyTask)
+                .transaction(data => {
+                    data.completed = !data.completed;
+                    return data
+                })
+        }
   }
 }
 </script>
