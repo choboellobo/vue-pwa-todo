@@ -36,7 +36,7 @@ export default {
   @import url('../node_modules/animate.css/animate.css');
   @import 'helpers';
   //global styles
-  .collection, .collection-item{
-    border:0 !important;
+  .collection{
+    border:0;
   }
   </style>
