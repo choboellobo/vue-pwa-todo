@@ -1,7 +1,7 @@
 <template lang="pug">
   div
     Navbar.hide-buttons-right(:title="title" :backButton="true")
-    .container(v-if="wallet")
+    div(v-if="wallet")
       .row(v-if="wallet.tasks")
         .col.s12
           ul.collection

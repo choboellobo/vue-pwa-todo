@@ -2,16 +2,16 @@
   div
     Navbar(title="Lista de la compra")
     //- If there is more than 0 wallets
-    .container(v-if="wallets.length > 0")
-       .row
-         .col.s12
-            ul.collection
-              li.collection-item.avatar(v-for="wallet in wallets" )
-                div(@click="goToWallet(wallet)")
-                  .title {{wallet.name}}
-                  p(v-if="wallet.tasks") Completados #[strong {{ wallet.tasks | taskDone }}] de #[strong {{ Object.keys(wallet.tasks).length }}]
-                a.secondary-content
-                  i.material-icons more_vert
+    div(v-if="wallets.length > 0")
+      .row
+        .col.s12
+          ul.collection
+            li.collection-item.avatar(v-for="wallet in wallets" )
+              div(@click="goToWallet(wallet)")
+                .title {{wallet.name}}
+                p(v-if="wallet.tasks") Completados #[strong {{ wallet.tasks | taskDone }}] de #[strong {{ Object.keys(wallet.tasks).length }}]
+              a.secondary-content
+                i.material-icons more_vert
     Fab
       button.btn-floating.btn-large.indigo.darken-1(@click="modalAddWallet.open()")
         i.material-icons add
