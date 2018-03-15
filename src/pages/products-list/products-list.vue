@@ -5,7 +5,7 @@
       .row(v-if="wallet.tasks")
         .col.s12
           ul.collection
-            li.collection-item(v-for="(task, key) in wallet.tasks")
+            li.collection-item(v-for="(task, key) in tasksOrdered")
               label
                 input(type="checkbox" :checked="task.completed" @change="toggleTask(key)")
                 span(:class="{'completed': task.completed}") {{task.name}}
@@ -32,6 +32,14 @@ export default {
   computed: {
     title() {
       return this.wallet ? this.wallet.name : ''
+    },
+    tasksOrdered() {
+      let list = []
+        for(let i in this.wallet.tasks){
+          this.wallet.tasks[i].key = i;
+          list.push(this.wallet.tasks[i])
+        }
+      return list.sort((a,b) => !a.completed).reverse()
     }
   },
   mounted(){
