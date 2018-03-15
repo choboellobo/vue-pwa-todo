@@ -11,25 +11,32 @@
                 i.material-icons.circle folder
                 .title {{wallet.name}}
                 p(v-if="wallet.tasks") Completados #[strong {{ wallet.tasks | taskDone }}] de #[strong {{ Object.keys(wallet.tasks).length }}]
-              a.secondary-content
+              a.secondary-content.dropdown-trigger(data-target="dropdown1")
                 i.material-icons more_vert
+              ul.dropdown-content(id="dropdown1")
+                li
+                  a(href="") borrar
+                li
+                  a(href="" compartir)
     Fab
       button.btn-floating.btn-large.indigo.darken-1(@click="modalAddWallet.open()")
         i.material-icons add
 
     //out of viewport
     Modal(@mounted="modalAddWallet = $event")
-      div(slot="content")
-        h1 hola mundo
+      div.input-field(slot="content")
+        input.validate(id="first_name" type="text")
+        label(for="first_name") Ingrese un nombre
       div(slot="footer")
-        a.btn soy un boton
+        a.btn CANCELAR
+        a.btn AÑADIR
     Loading(v-if="loading")
     EmptyContent(icon="playlist_add" text="Añade una nueva lista" v-if="wallets.length == 0 && !loading")
 </template>
 
 <script>
 import {mapGetters} from 'vuex';
-export default {
+export default { 
   filters: {
     taskDone(tasks) {
       let num = 0;
