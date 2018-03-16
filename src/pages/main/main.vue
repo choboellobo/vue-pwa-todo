@@ -11,10 +11,13 @@
                 i.material-icons.circle folder
                 .title {{wallet.name}}
                 p(v-if="wallet.tasks") Completados #[strong {{ wallet.tasks | taskDone }}] de #[strong {{ Object.keys(wallet.tasks).length }}]
-              a.secondary-content.dropdown-trigger(data-target="dropdown1" @click="removeWallet(wallet.key)")
-                i.material-icons more_vert
+              //- a.secondary-content.dropdown-trigger(@click="removeWallet(wallet.key)")
+              //-   i.material-icons more_vert
+              Dropdown
+                li
+                  a(@click="removeWallet(wallet.key)") Eliminar
     Fab
-      button.btn-floating.btn-large.indigo.darken-1(@click="modalAddWallet.open(); $refs.inputCreateWallet.focus()")
+      button.btn-floating.btn-large.indigo.darken-1(@click="modalAddWallet.open(); walletModel.name = '';$refs.inputCreateWallet.focus()")
         i.material-icons add
 
     //out of viewport
