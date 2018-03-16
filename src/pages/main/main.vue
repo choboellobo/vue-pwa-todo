@@ -26,10 +26,10 @@
     Modal(@mounted="modalAddWallet = $event")
       div.input-field(slot="content")
         input.validate(id="first_name" type="text")
-        label(for="first_name") Ingrese un nombre
+        label.active(for="first_name") Ingrese un nombre
       div(slot="footer")
-        a.btn CANCELAR
-        a.btn AÑADIR
+        a.btn-flat.waves-effect.modal-action.modal-close CANCELAR
+        a.btn-flat.waves-effect AÑADIR
     Loading(v-if="loading")
     EmptyContent(icon="playlist_add" text="Añade una nueva lista" v-if="wallets.length == 0 && !loading")
 </template>
