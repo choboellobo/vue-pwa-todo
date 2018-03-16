@@ -11,25 +11,20 @@
                 i.material-icons.circle folder
                 .title {{wallet.name}}
                 p(v-if="wallet.tasks") Completados #[strong {{ wallet.tasks | taskDone }}] de #[strong {{ Object.keys(wallet.tasks).length }}]
-              a.secondary-content.dropdown-trigger(data-target="dropdown1")
+              a.secondary-content.dropdown-trigger(data-target="dropdown1" @click="removeWallet(wallet.key)")
                 i.material-icons more_vert
-              ul.dropdown-content(id="dropdown1")
-                li
-                  a(href="") borrar
-                li
-                  a(href="" compartir)
     Fab
-      button.btn-floating.btn-large.indigo.darken-1(@click="modalAddWallet.open()")
+      button.btn-floating.btn-large.indigo.darken-1(@click="modalAddWallet.open(); $refs.inputCreateWallet.focus()")
         i.material-icons add
 
     //out of viewport
     Modal(@mounted="modalAddWallet = $event")
       div.input-field(slot="content")
-        input.validate(id="first_name" type="text")
-        label.active(for="first_name") Ingrese un nombre
+        input.validate(id="new_list" type="text" v-model="walletModel.name" ref="inputCreateWallet")
+        label(for="new_list") Ingrese un nombre
       div(slot="footer")
         a.btn-flat.waves-effect.modal-action.modal-close CANCELAR
-        a.btn-flat.waves-effect AÑADIR
+        a.btn-flat.waves-effect(@click="createWallet" :disabled="!walletModel.name") AÑADIR
     Loading(v-if="loading")
     EmptyContent(icon="playlist_add" text="Añade una nueva lista" v-if="wallets.length == 0 && !loading")
 </template>
@@ -101,7 +96,6 @@ export default {
             this.wallets.push(Object.assign({key: wallet}, snapshot.val()))
         });
       })
-      console.log(this.wallets)
       this.loading = false
     },
     createWallet(){
@@ -110,6 +104,7 @@ export default {
         created: new Date().toString()
       })
       let promiseUserWallet = promiseWallet.then(res => {
+        // Reset Wallet Model 
         this.walletModel.name = ''
         this.db.ref('/users/' + this.getUserData.uid +'/wallets').transaction(data => {
           Array.isArray(data) ? data.push(res.key) :  data = [res.key]
