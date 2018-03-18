@@ -36,6 +36,9 @@ export default {
   @import url('../node_modules/animate.css/animate.css');
   @import 'helpers';
   //global styles
+  body{
+    height: 100vh;
+  }
   .collection{
     border:0;
   }
