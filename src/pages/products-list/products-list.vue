@@ -14,13 +14,19 @@
                   a(@click="removeTask(task.key)") Eliminar                    
     //outviewport
     Loading(v-if="!wallet")
+    // Fabs
     Fab.right-top-edge
-      a.btn-floating.blue.darken-1
+      a.btn-floating.blue.darken-1(@click="addItemListModal.open()")
         i.large.material-icons add
     Fab( v-if="wallet && wallet.tasks")
       a.btn-floating.btn-large.red(@click="removeAllTasks")
         i.large.material-icons delete_forever
+    // EmptyContent
     EmptyContent(v-if="wallet && !wallet.tasks" icon="add" text="Haz clik en el icono + para añadir productos a tu lista")
+    // Modal
+    Modal(@mounted="addItemListModal = $event")
+      div(slot="name") Content 
+
 </template>
 <script>
 import {mapGetters, mapMutations} from 'vuex';
@@ -28,7 +34,8 @@ export default {
   data() {
     return {
       db: null,
-      wallet: null
+      wallet: null,
+      addItemListModal: null
     }
   },
   computed: {
