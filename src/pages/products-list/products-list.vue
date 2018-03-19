@@ -1,7 +1,7 @@
 <template lang="pug">
   div
     Navbar.hide-buttons-right(:title="title" :backButton="true")
-    div(v-if="wallet")
+    div.margin-top-1(v-if="wallet")
       .row(v-if="wallet.tasks")
         .col.s12
           ul.collection
@@ -9,7 +9,9 @@
               label
                 input(type="checkbox" :checked="task.completed" @change="toggleTask(key)")
                 span(:class="{'completed': task.completed}") {{task.name}}
-              a.secondary-content #[i.material-icons more_vert]
+              Dropdown
+                li
+                  a Eliminar                    
     //outviewport
     Loading(v-if="!wallet")
     Fab.right-top-edge

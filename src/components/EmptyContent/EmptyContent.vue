@@ -6,16 +6,7 @@
 </template>
 <script>
 export default {
-  props: {
-    icon:{
-      type:String,
-      default:"add"
-    },
-    text:{
-      type:String,
-      default:"lista nueva"
-    }
-  }
+  props: ["icon","text"]
 }
 </script>
 <style src="./EmptyContent.scss" lang="scss" scoped>
