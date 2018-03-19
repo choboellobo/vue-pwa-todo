@@ -1,5 +1,5 @@
 <template lang="pug">
-  div
+  div.inline
     a.secondary-content.dropdown-trigger(:data-target='key' ref="dropdownTrigger")
         i.material-icons {{icon}}
     ul.dropdown-content(:id="key" )
@@ -26,3 +26,6 @@ export default {
   }
 }
 </script>
+<style src="./Dropdown.scss" lang="scss" scoped>
+    
+</style>
