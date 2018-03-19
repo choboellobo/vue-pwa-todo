@@ -7,11 +7,11 @@
           ul.collection
             li.collection-item(v-for="(task, key) in tasksOrdered")
               label
-                input(type="checkbox" :checked="task.completed" @change="toggleTask(key)")
+                input(type="checkbox" :checked="task.completed" @change="toggleTask(task.key)")
                 span(:class="{'completed': task.completed}") {{task.name}}
               Dropdown
                 li
-                  a Eliminar                    
+                  a(@click="removeTask(task.key)") Eliminar                    
     //outviewport
     Loading(v-if="!wallet")
     Fab.right-top-edge
@@ -41,7 +41,12 @@ export default {
           this.wallet.tasks[i].key = i;
           list.push(this.wallet.tasks[i])
         }
-      return list.sort((a,b) => !a.completed).reverse()
+      let orderList = []
+      for(let item of list) {
+        if(item.completed) orderList.push(item)
+        else orderList.unshift(item)
+      }
+      return orderList
     }
   },
   mounted(){
@@ -52,6 +57,11 @@ export default {
             })
   },
   methods: {
+        removeTask(taskId) {
+            let confirm = window.confirm("Desea borrar este item")
+            if(!confirm) return 
+            this.db.ref('/wallets/'+ this.$route.params.key + '/tasks/'+ taskId).remove()
+        },
         removeAllTasks() {
             let confirm = window.confirm("Desea borrar todas las tareas")
             if(confirm) this.db.ref('/wallets/'+ this.$route.params.key + '/tasks').set([])
