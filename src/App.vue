@@ -40,6 +40,7 @@ export default {
     height: 100vh;
   }
   .collection{
+    overflow: visible;
     border:0;
-  }
-  </style>
+    }
+</style>
