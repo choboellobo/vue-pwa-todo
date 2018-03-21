@@ -41,6 +41,9 @@ export default {
   }
   .collection{
     overflow: visible;
-    border:0;
+    border:0
     }
+  .btn-flat[disabled]{
+    background-color: transparent !important;
+  }
 </style>

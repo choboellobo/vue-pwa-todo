@@ -25,8 +25,12 @@
     EmptyContent(v-if="wallet && !wallet.tasks" icon="add" text="Haz clik en el icono + para añadir productos a tu lista")
     // Modal
     Modal(@mounted="addItemListModal = $event")
-      div(slot="name") Content 
-
+      div.input-field(slot="content")
+        input.validate(id="nombre" type="text")
+        label(for="nombre") Ingrese un nombre
+      div(slot="footer")
+        button.modal-action.modal-close.waves-effect.waves-green.btn-flat CANCELAR
+        button.modal-action.modal-close.waves-effect.waves-green.btn-flat(disabled) AÑADIR
 </template>
 <script>
 import {mapGetters, mapMutations} from 'vuex';
