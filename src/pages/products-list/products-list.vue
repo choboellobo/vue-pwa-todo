@@ -16,7 +16,7 @@
     Loading(v-if="!wallet")
     // Fabs
     Fab.right-top-edge
-      a.btn-floating.blue.darken-1(@click="addItemListModal.open()")
+      a.btn-floating.blue.darken-1(@click="addItemListModal.open(); $refs.inputTask.focus()")
         i.large.material-icons add
     Fab( v-if="wallet && wallet.tasks")
       a.btn-floating.btn-large.red(@click="removeAllTasks")
@@ -26,11 +26,11 @@
     // Modal
     Modal(@mounted="addItemListModal = $event")
       div.input-field(slot="content")
-        input.validate(id="nombre" type="text")
+        input.validate(id="nombre" type="text" v-model="task.name" ref="inputTask")
         label(for="nombre") Ingrese un nombre
       div(slot="footer")
         button.modal-action.modal-close.waves-effect.waves-green.btn-flat CANCELAR
-        button.modal-action.modal-close.waves-effect.waves-green.btn-flat(disabled) AÑADIR
+        button.modal-action.waves-effect.waves-green.btn-flat(:disabled="canAddTask" @click="addTask") AÑADIR
 </template>
 <script>
 import {mapGetters, mapMutations} from 'vuex';
@@ -39,10 +39,14 @@ export default {
     return {
       db: null,
       wallet: null,
-      addItemListModal: null
+      addItemListModal: null,
+      task: {completed: false, name: ''}
     }
   },
   computed: {
+    canAddTask() {
+            return this.task.name.length === 0
+    },
     title() {
       return this.wallet ? this.wallet.name : ''
     },
@@ -68,6 +72,16 @@ export default {
             })
   },
   methods: {
+      addTask(){
+          // Add Firebase push
+          this.db.ref('/wallets/'+ this.$route.params.key + '/tasks')
+              .push(this.task)
+              .then(() => {
+                // Close the modal :)
+                this.addItemListModal.close()
+                this.task.name = ''
+              })
+        },
         removeTask(taskId) {
             let confirm = window.confirm("Desea borrar este item")
             if(!confirm) return 

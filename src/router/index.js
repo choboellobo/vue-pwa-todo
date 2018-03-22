@@ -5,6 +5,7 @@ import {store} from '../store/store';
 const Login = () => import('../pages/login/login')
 const Main = () => import('../pages/main/main')
 const ProductsList = () => import('../pages/products-list/products-list')
+const AddWalletUserPage = () => import('../pages/AddWalletUserPage')
 
 Vue.use(Router)
 
@@ -28,6 +29,11 @@ export default new Router({
         if(store.state.user) next(false)
         else next()
       }
+    },
+    {
+      path: '/mix/:wallet',
+      name: 'Mix',
+      component: AddWalletUserPage
     },
     {
       path: '/main',

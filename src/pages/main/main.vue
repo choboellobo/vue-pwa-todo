@@ -15,7 +15,7 @@
                 li
                   a(@click="removeWallet(wallet.key)") Eliminar
                 li
-                  a Compartir
+                  a(@click="shareWallet(wallet.key)") Compartir
     Fab
       button.btn-floating.btn-large.indigo.darken-1(@click="modalAddWallet.open(); walletModel.name = '';$refs.inputCreateWallet.focus()")
         i.material-icons add
@@ -82,7 +82,7 @@ export default {
             text: 'Quiero compartir mi lista contigo, pincha en el enlace para añadirte a ella.',
             url: url
         })
-      }
+      }else alert("No soporta compartir")
     },
     removeWallet(key) {
       let confirm = window.confirm('Desea borrar')
