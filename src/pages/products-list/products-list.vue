@@ -16,7 +16,7 @@
     Loading(v-if="!wallet")
     // Fabs
     Fab.right-top-edge
-      a.btn-floating.blue.darken-1(@click="addItemListModal.open()")
+      a.btn-floating.blue.darken-1(@click="addItemListModal.open(); $refs.inputTask.focus()")
         i.large.material-icons add
     Fab( v-if="wallet && wallet.tasks")
       a.btn-floating.btn-large.red(@click="removeAllTasks")
@@ -26,7 +26,7 @@
     // Modal
     Modal(@mounted="addItemListModal = $event")
       div.input-field(slot="content")
-        input.validate(id="nombre" type="text" v-model="task.name")
+        input.validate(id="nombre" type="text" v-model="task.name" ref="inputTask")
         label(for="nombre") Ingrese un nombre
       div(slot="footer")
         button.modal-action.modal-close.waves-effect.waves-green.btn-flat CANCELAR
