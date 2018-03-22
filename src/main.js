@@ -3,6 +3,28 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+// Materialize
+import materialize from 'materialize-css';
+Vue.prototype.$materialize = materialize;
+// Moment
+import moment from 'moment'
+Vue.prototype.$moment = moment
+// Firebase
+import firebase from 'firebase'
+import firebaseConfig from './firebase.config'
+firebase.initializeApp(firebaseConfig);
+Vue.prototype.$firebase = firebase;
+
+//Bus event
+const bus = new Vue()
+Vue.prototype.$bus = bus;
+
+// Vuex
+import {store} from './store/store';
+
+// Components
+import Components from './components'
+Vue.use(Components)
 
 Vue.config.productionTip = false
 
@@ -10,6 +32,7 @@ Vue.config.productionTip = false
 new Vue({
   el: '#app',
   router,
+  store,
   template: '<App/>',
   components: { App }
 })

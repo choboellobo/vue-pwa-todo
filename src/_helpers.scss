@@ -1,0 +1,16 @@
+//Flex
+.flex{
+  display: flex;
+  &.vertical-center{
+    align-items: center;
+  }
+  &.horizontal-center{
+    justify-content: center;
+  }
+  &.flex-column{
+    flex-direction: column;
+  }
+}
+.margin-top-1{
+  margin-top: 1em;
+}

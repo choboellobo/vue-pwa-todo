@@ -1,0 +1,16 @@
+.hide-buttons-right{
+  ul.right {
+    display: none;
+  }
+}
+.navbar-fixed{
+  .hidden{
+    display: none;
+  }
+  z-index: 990;
+  .nav-wrapper{
+    .title{
+      margin-left: 1.5em;
+    }
+   }
+ }

@@ -1,0 +1,13 @@
+.fixed-action-btn{
+    height: 56px;
+    &.right{
+        right: 2em;
+    }
+    &.top{
+        top: 1.5em;
+    }
+    &.right-top-edge{
+        top: 1.5em;
+        right: 2em;
+    }
+}
