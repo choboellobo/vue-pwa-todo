@@ -8,7 +8,7 @@
             li.collection-item(v-for="(task, key) in tasksOrdered")
               label
                 input(type="checkbox" :checked="task.completed" @change="toggleTask(task.key)")
-                span(:class="{'completed': task.completed}") {{task.name}}
+                span.truncate(style="width: 90%" :class="{'completed': task.completed}") {{task.name}}
               Dropdown
                 li
                   a(@click="removeTask(task.key)") Eliminar                    
