@@ -15,6 +15,6 @@ export default {
 }
 </script>
 
-<style src="./Loading.scss" lang="scss" scoped>
+<style src="./loading.scss" lang="scss" scoped>
   
 </style>
