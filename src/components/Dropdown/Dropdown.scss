@@ -1,3 +1,7 @@
+@import "../../colors";
 .inline{
     display: inline;
+    .secondary-content, .dropdown-content a{
+        color: $primary-color !important;
+    }
 }

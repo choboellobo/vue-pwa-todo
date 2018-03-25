@@ -13,7 +13,7 @@
                 p(v-if="wallet.tasks") Completados #[strong {{ wallet.tasks | taskDone }}] de #[strong {{ Object.keys(wallet.tasks).length }}]
               Dropdown
                 li
-                  a(@click="removeWallet(wallet.key)") Eliminar
+                  a.primary-color(@click="removeWallet(wallet.key)") Eliminar
                 li
                   a(@click="shareWallet(wallet.key)") Compartir
     Fab
