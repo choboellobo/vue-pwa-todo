@@ -8,12 +8,12 @@
           ul.collection
             li.collection-item.avatar(v-for="wallet in wallets" )
               div(@click="goToWallet(wallet)")
-                i.material-icons.circle folder
+                i.material-icons.circle shopping_basket
                 .title {{wallet.name}}
                 p(v-if="wallet.tasks") Completados #[strong {{ wallet.tasks | taskDone }}] de #[strong {{ Object.keys(wallet.tasks).length }}]
               Dropdown
                 li
-                  a(@click="removeWallet(wallet.key)") Eliminar
+                  a.primary-color(@click="removeWallet(wallet.key)") Eliminar
                 li
                   a(@click="shareWallet(wallet.key)") Compartir
     Fab

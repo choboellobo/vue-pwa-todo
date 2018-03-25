@@ -73,14 +73,12 @@ export default {
   },
   methods: {
       addTask(){
+          // Close the modal :)
+          this.addItemListModal.close()
           // Add Firebase push
           this.db.ref('/wallets/'+ this.$route.params.key + '/tasks')
               .push(this.task)
-              .then(() => {
-                // Close the modal :)
-                this.addItemListModal.close()
-                this.task.name = ''
-              })
+              .then(() => this.task.name = '')
         },
         removeTask(taskId) {
             let confirm = window.confirm("Desea borrar este item")

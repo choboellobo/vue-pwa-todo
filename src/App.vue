@@ -46,4 +46,7 @@ export default {
   .btn-flat[disabled]{
     background-color: transparent !important;
   }
+  .primary-color{
+    color: #3949ab;
+  }
 </style>
