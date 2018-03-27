@@ -10,13 +10,15 @@ export default {
   name: 'app',
   data() {
     return {
-      userUid: null
+      userUid: null,
+      messaging: null
     }
   },
   mounted() {
-
+    this.messaging = this.$firebase.messaging();
     this.$firebase.auth().onAuthStateChanged((user) => {
       if(user) {
+        this.requestPushNotification()
         this.userUid = user.uid
         this.setUserData(user);
       } else {
@@ -26,7 +28,20 @@ export default {
     })
   },
   methods: {
-    ...mapMutations(['setUserData'])
+    ...mapMutations(['setUserData']),
+    requestPushNotification() {
+      this.messaging.requestPermission().then(()=> this.getNotificationToken())
+      this.notificationTokenRefresh()
+    },
+    getNotificationToken() {
+      this.messaging.getToken().then(currentToken => {
+        console.log(this.userUid, currentToken)
+        if (currentToken && this.userUid) this.$firebase.database().ref('/users/'+ this.userUid + '/pushToken').set({token: currentToken})
+      }) 
+    },
+    notificationTokenRefresh() {
+      this.messaging.onTokenRefresh(()=> {this.getNotificationToken()})
+    }
   }
 }
 </script>
