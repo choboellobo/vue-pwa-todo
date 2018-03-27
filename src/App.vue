@@ -19,6 +19,7 @@ export default {
     this.$firebase.auth().onAuthStateChanged((user) => {
       if(user) {
         this.requestPushNotification()
+        this.watchNotification();
         this.userUid = user.uid
         this.setUserData(user);
       } else {
@@ -41,6 +42,20 @@ export default {
     },
     notificationTokenRefresh() {
       this.messaging.onTokenRefresh(()=> {this.getNotificationToken()})
+    },
+    getNotificationSuscription() {
+      if(navigator.serviceWorker) {
+        navigator.serviceWorker.getRegistrations().then(suscriptions => {
+          let firebaseSW = suscriptions.filter(sw => sw.active.scriptURL.includes('firebase'))
+          if(firebaseSW.length > 0) return firebaseSW[0].pushManager.getSubscription()
+          else return Promise.resolve(null)
+        })
+      }
+    },
+    watchNotification(){
+      this.messaging.onMessage(notification => {
+        console.log(notification)
+      })
     }
   }
 }
