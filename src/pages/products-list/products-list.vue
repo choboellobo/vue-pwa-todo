@@ -5,18 +5,20 @@
       .row(v-if="wallet.tasks")
         .col.s12
           ul.collection
-            li.collection-item(v-for="(task, key) in tasksOrdered")
+            li.collection-item(v-for="($task, key) in tasksOrdered")
               label
-                input(type="checkbox" :checked="task.completed" @change="toggleTask(task.key)")
-                span.truncate(style="width: 90%" :class="{'completed': task.completed}") {{task.name}}
+                input(type="checkbox" :checked="$task.completed" @change="toggleTask($task.key)")
+                span.truncate(style="width: 90%" :class="{'completed': $task.completed}") {{$task.name}}
               Dropdown
                 li
-                  a(@click="removeTask(task.key)") Eliminar                    
+                  a(@click=" openModalEdit($task)") Editar 
+                li
+                  a(@click="removeTask($task.key)") Eliminar                    
     //outviewport
     Loading(v-if="!wallet")
     // Fabs
     Fab.right-top-edge
-      a.btn-floating.blue.darken-1(@click="addItemListModal.open(); $refs.inputTask.focus()")
+      a.btn-floating.blue.darken-1(@click="addItemListModal.open(); $refs.inputTask.focus(); task.name = ''")
         i.large.material-icons add
     Fab( v-if="wallet && wallet.tasks")
       a.btn-floating.btn-large.red(@click="removeAllTasks")
@@ -27,10 +29,11 @@
     Modal(@mounted="addItemListModal = $event")
       div.input-field(slot="content")
         input.validate(id="nombre" type="text" v-model="task.name" ref="inputTask")
-        label(for="nombre") Ingrese un nombre
+        label(for="nombre") {{editKey ? 'Edite el nombre' : 'Ingrese un nombre' }} 
       div(slot="footer")
         button.modal-action.modal-close.waves-effect.waves-green.btn-flat CANCELAR
-        button.modal-action.waves-effect.waves-green.btn-flat(:disabled="canAddTask" @click="addTask") AÑADIR
+        button.modal-action.waves-effect.waves-green.btn-flat(v-if="editKey" :disabled="canAddTask" @click="editTaskName") EDITAR
+        button.modal-action.waves-effect.waves-green.btn-flat(v-else :disabled="canAddTask" @click="addTask") ACEPTAR
 </template>
 <script>
 import {mapGetters, mapMutations} from 'vuex';
@@ -43,7 +46,8 @@ export default {
       db: null,
       wallet: null,
       addItemListModal: null,
-      task: {completed: false, name: ''}
+      task: {completed: false, name: ''},
+      editKey: null
     }
   },
   computed: {
@@ -78,13 +82,20 @@ export default {
             })
   },
   methods: {
+      openModalEdit(task) {
+        this.task.name = task.name;
+        this.editKey = task.key;
+        this.addItemListModal.open(); 
+        this.$refs.inputTask.focus()
+
+      },
       addTask(){
           // Close the modal :)
           this.addItemListModal.close()
           // Add Firebase push
           this.db.ref('/wallets/'+ this.$route.params.key + '/tasks')
               .push(this.task)
-              .then(() => this.task.name = '')
+              .then(() => this.resetInputs() )
         },
         removeTask(taskId) {
             let confirm = window.confirm("Desea borrar este item")
@@ -101,6 +112,27 @@ export default {
                     data.completed = !data.completed;
                     return data
                 })
+        },
+        editTaskName() {
+          // Set new name
+          let new_name = this.task.name;
+           // Close the modal :)
+          this.addItemListModal.close()
+
+          this.db.ref('/wallets/'+ this.$route.params.key + '/tasks/'+ this.editKey)
+            .transaction(data => {
+              data.name = new_name
+              return data
+            })
+            // Clear task name input
+            this.task.name = ''
+            // Clear editKey
+            this.editKey = null
+            // Reset Input
+            this.resetInputs()
+        },
+        resetInputs() {
+           this.$materialize.updateTextFields();
         }
   }
 }

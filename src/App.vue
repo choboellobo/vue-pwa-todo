@@ -9,7 +9,7 @@
 import { Observable } from 'rxjs/Observable'
 import { Subject } from 'rxjs/Subject'
 const $subPush = new Subject()
-export const pushNotification = subPush.asObservable()
+export const pushNotification = $subPush.asObservable()
 
 import {mapMutations, mapGetters} from 'vuex'
 export default {
