@@ -3,6 +3,11 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+// Rxjs
+import Rx from 'rxjs/Rx'
+import VueRx from 'vue-rx'
+Vue.use(VueRx, Rx)
+
 // Materialize
 import materialize from 'materialize-css';
 Vue.prototype.$materialize = materialize;

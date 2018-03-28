@@ -33,6 +33,9 @@
 </template>
 
 <script>
+// Observable
+import { pushNotification } from '../../App';
+// Vuex
 import {mapGetters} from 'vuex';
 export default { 
   filters: {
@@ -60,6 +63,7 @@ export default {
     }
   },
   mounted(){
+    
     let user = this.getUserData.uid
     this.db = this.$firebase.database();
     this.db.ref('/users/'+ user +'/wallets')

@@ -5,13 +5,19 @@
 </template>
 
 <script>
+// Rxjs
+import { Observable } from 'rxjs/Observable'
+import { Subject } from 'rxjs/Subject'
+const $subPush = new Subject()
+export const pushNotification = subPush.asObservable()
+
 import {mapMutations, mapGetters} from 'vuex'
 export default {
   name: 'app',
   data() {
     return {
       userUid: null,
-      messaging: null
+      messaging: null,
     }
   },
   mounted() {
@@ -36,7 +42,6 @@ export default {
     },
     getNotificationToken() {
       this.messaging.getToken().then(currentToken => {
-        console.log(this.userUid, currentToken)
         if (currentToken && this.userUid) this.$firebase.database().ref('/users/'+ this.userUid + '/pushToken').set({token: currentToken})
       }) 
     },
@@ -54,7 +59,7 @@ export default {
     },
     watchNotification(){
       this.messaging.onMessage(notification => {
-        console.log(notification)
+        $subPush.next(notification);
       })
     }
   }

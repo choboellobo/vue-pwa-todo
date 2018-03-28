@@ -34,6 +34,9 @@
 </template>
 <script>
 import {mapGetters, mapMutations} from 'vuex';
+// Observable
+import { pushNotification } from '../../App';
+
 export default {
   data() {
     return {
@@ -65,6 +68,9 @@ export default {
     }
   },
   mounted(){
+    // Observable for pushNotification;
+    pushNotification.subscribe(console.log);
+
     this.db = this.$firebase.database();
     this.db.ref('/wallets/'+ this.$route.params.key)
             .on('value', snapshot => {
