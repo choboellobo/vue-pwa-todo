@@ -15,11 +15,11 @@
                 li
                   a.primary-color(@click="removeWallet(wallet.key)") Eliminar
                 li
-                  a(@click="shareWallet(wallet.key)") Compartir
+                  a(@click="shareWallet(wallet.key)") Compartir            
     Fab
-      button.btn-floating.btn-large.indigo.darken-1(@click="modalAddWallet.open(); walletModel.name = '';$refs.inputCreateWallet.focus()")
+      button.btn-floating.btn-large.indigo.darken-1#add(@click="modalAddWallet.open(); walletModel.name = '';$refs.inputCreateWallet.focus()")
         i.material-icons add
-
+    FeatureDiscovery(title="Nueva lista" content="Añade una nueva lista haciendo click aquí; podrás compartirla o eliminarla." target="add")
     //out of viewport
     Modal(@mounted="modalAddWallet = $event")
       div.input-field(slot="content")
