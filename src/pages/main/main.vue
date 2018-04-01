@@ -17,7 +17,7 @@
                 li
                   a(@click="shareWallet(wallet.key)") Compartir            
     Fab
-      button.btn-floating.btn-large.indigo.darken-1#add(@click="modalAddWallet.open(); walletModel.name = '';$refs.inputCreateWallet.focus()")
+      button.btn-floating.btn-large.indigo.darken-1(id="add" @click="modalAddWallet.open(); walletModel.name = '';$refs.inputCreateWallet.focus()")
         i.material-icons add
     FeatureDiscovery(title="Nueva lista" content="Añade una nueva lista haciendo click aquí; podrás compartirla o eliminarla." target="add")
     //out of viewport

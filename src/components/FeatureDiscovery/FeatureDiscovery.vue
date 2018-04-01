@@ -1,14 +1,15 @@
 <template lang="pug">
   div.tap-target(:data-target="target")
     .tap-target-content
-        h5 {{ title }}
+        h5 {{ title }} 
         p {{ content }}
         
 </template>
 
- scoped lang="scss">
-</style>
-
+ <style lang="scss" src="./FeatureDiscovery.scss" scoped>
+ 
+ </style>
+ 
 <script>
 export default {
     props:["title","content","target"],

@@ -1,7 +1,7 @@
 <template lang="pug">
   div
     Navbar.hide-buttons-right(:title="title" :backButton="true")
-    div.margin-top-1(v-if="wallet")
+    div.margin-top-1
       .row(v-if="wallet.tasks")
         .col.s12
           ul.collection
@@ -18,10 +18,11 @@
     Loading(v-if="!wallet")
     // Fabs
     Fab.right-top-edge
-      a.btn-floating.blue.darken-1(@click="addItemListModal.open(); $refs.inputTask.focus(); task.name = ''")
+      button.btn-floating.blue.darken-1(id="productListAdd" @click="addItemListModal.open(); $refs.inputTask.focus(); task.name = ''")
         i.large.material-icons add
+    FeatureDiscovery(title="Añade productos" content="Aquí podrás añadir los productos a tu cesta" target="productListAdd")
     Fab( v-if="wallet && wallet.tasks")
-      a.btn-floating.btn-large.red(@click="removeAllTasks")
+      button.btn-floating.btn-large.red(@click="removeAllTasks")
         i.large.material-icons delete_forever
     // EmptyContent
     EmptyContent(v-if="wallet && !wallet.tasks" icon="add" text="Haz clik en el icono + para añadir productos a tu lista")
@@ -75,11 +76,13 @@ export default {
     // Observable for pushNotification;
     pushNotification.subscribe(console.log);
 
-    this.db = this.$firebase.database();
+    this.db = this.$firebase.database()
+  
     this.db.ref('/wallets/'+ this.$route.params.key)
-            .on('value', snapshot => {
-                this.wallet = snapshot.val()
+           .on('value', snapshot => {
+               this.wallet = snapshot.val()
             })
+    
   },
   methods: {
       openModalEdit(task) {
