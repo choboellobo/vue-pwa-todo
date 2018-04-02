@@ -19,7 +19,12 @@
     Fab
       button.btn-floating.btn-large.indigo.darken-1(id="add" @click="modalAddWallet.open(); walletModel.name = '';$refs.inputCreateWallet.focus()")
         i.material-icons add
-    FeatureDiscovery(title="Nueva lista" content="Añade una nueva lista haciendo click aquí; podrás compartirla o eliminarla." target="add")
+    FeatureDiscovery(
+        @close-feature-discovery="closeFeatureDiscovery" 
+        @mounted="featureDiscovery = $event" 
+        title="Nueva lista" 
+        content="Añade una nueva lista haciendo click aquí; podrás compartirla o eliminarla." 
+        target="add")
     //out of viewport
     Modal(@mounted="modalAddWallet = $event")
       div.input-field(slot="content")
@@ -36,7 +41,7 @@
 // Observable
 import { pushNotification } from '../../App';
 // Vuex
-import {mapGetters} from 'vuex';
+import {mapGetters, mapMutations} from 'vuex';
 export default { 
   filters: {
     taskDone(tasks) {
@@ -48,7 +53,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['getUserData']),
+    ...mapGetters(['getUserData','getFeatureDiscovery']),
     canAddWallet() {
       return this.walletModel.name.length == 0
     }
@@ -59,12 +64,18 @@ export default {
       db: null,
       wallets: [],
       modalAddWallet: null,
-      walletModel: {name: ''}
+      walletModel: {name: ''},
+      featureDiscovery: null
     }
   },
   mounted(){
-    
     let user = this.getUserData.uid
+    let $featureDiscovery  = this.getFeatureDiscovery
+    // Feature Discovery
+    if(!$featureDiscovery || !$featureDiscovery.main) {
+      this.featureDiscovery.open();
+    }
+    
     this.db = this.$firebase.database();
     this.db.ref('/users/'+ user +'/wallets')
       .on('value', snapshot => {
@@ -75,6 +86,10 @@ export default {
       })
   },
   methods: {
+    ...mapMutations(['updateFeatureDiscovery']),
+    closeFeatureDiscovery() {
+      this.updateFeatureDiscovery({key: 'main'})
+    },
     goToWallet(wallet) {
       this.$router.push({name: 'ProductList', params: {key: wallet.key}})
     },

@@ -15,9 +15,14 @@ export default {
     props:["title","content","target"],
     mounted(){
         const elem = document.querySelector(".tap-target");
-        let fd = this.$materialize.FeatureDiscovery.init(elem)
-            fd.open()
-    }
+        const options = {
+            onClose: ()=> {
+                this.$emit('close-feature-discovery')
+            }
+        }
+        let fd = this.$materialize.FeatureDiscovery.init(elem, options)
+        this.$emit('mounted', fd);
+    },
 }
 </script>
 
