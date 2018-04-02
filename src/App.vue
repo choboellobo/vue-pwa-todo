@@ -30,7 +30,7 @@ export default {
         this.setUserData(user);
       } else {
         this.setUserData(null)
-        this.$router.push({name: 'Login'})
+        this.$router.push({name: 'getStarted'})
       }
     })
   },
