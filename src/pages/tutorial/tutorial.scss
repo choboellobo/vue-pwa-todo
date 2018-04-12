@@ -1,0 +1,15 @@
+@import "../../helpers";
+
+.carousel{
+    .carousel-item{
+        height: 100vh;
+        color: white;
+        @extend .flex;
+        @extend .vertical-center;
+        @extend .horizontal-center;
+        @extend .flex-column;
+        p{
+            @extend .interline;
+        }
+    }
+}
