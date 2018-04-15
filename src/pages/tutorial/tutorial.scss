@@ -1,15 +1,33 @@
 @import "../../helpers";
 
 .carousel{
+    height: 100vh;
+    .carousel-fixed-item{
+        &.top{
+            top: 3em !important;
+            left: 3em !important;
+            right: 3em !important;
+        }
+    }
     .carousel-item{
-        height: 100vh;
-        color: white;
         @extend .flex;
         @extend .vertical-center;
         @extend .horizontal-center;
         @extend .flex-column;
+        color: white;
+        img{
+            display: block;
+            width: 80%;
+            height: 200px;
+            margin: 0 auto;
+            background: red;
+        }
+        h5{
+            text-align: center;
+        }
         p{
-            @extend .interline;
+            text-align: justify;
+            padding: 0 2em;
         }
     }
 }
