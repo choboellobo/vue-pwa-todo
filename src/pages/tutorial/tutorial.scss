@@ -17,7 +17,7 @@
         @extend .flex-column;
         color: white;
         &.slider-1{
-            @include background("static/img/icons/slider1.png",#c75c5c);
+            @include background("src/static/img/icons/slider1.png",#c75c5c);
         }
         h5{
             text-align: center;

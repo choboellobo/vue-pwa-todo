@@ -16,7 +16,7 @@
                 p Recuerda que tu aplicación se actualizará automáticamente sin necesidad de que hagas nada. Que la difrutes!
 </template>
 
-<style lang="scss" src="./tutorial.scss" scoped>
+<style src="./tutorial.scss" lang="scss" scoped>
 
 </style>
 
