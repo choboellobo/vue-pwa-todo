@@ -1,4 +1,5 @@
 @import "../../helpers";
+@import "../../mixin";
 
 .carousel{
     height: 100vh;
@@ -16,19 +17,7 @@
         @extend .flex-column;
         color: white;
         &.slider-1{
-            background: #c75c5c;
-        }
-        &.slider-2{
-            background: #e0995e;
-        }
-        &.slider-3{
-            background:  #4e5c73;
-        }
-        img{
-            display: block;
-            width: 80%;
-            height: 200px;
-            margin: 0 auto;         
+            @include background("static/img/icons/slider1.png",#c75c5c);
         }
         h5{
             text-align: center;

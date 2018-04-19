@@ -70,6 +70,7 @@ export default {
   @import url('../node_modules/materialize-css/dist/css/materialize.css');
   @import url('../node_modules/animate.css/animate.css');
   @import 'helpers';
+  @import 'mixin';
   //global styles
   body{
     height: 100vh;

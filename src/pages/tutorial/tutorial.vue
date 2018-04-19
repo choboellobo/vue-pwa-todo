@@ -4,7 +4,6 @@
             .carousel-fixed-item.center
                 button.btn.waves-effect.white.black-text EMPEZAR           
             .carousel-item.slider-1
-                img(src="static/img/icons/slider1.png")
                 h5 Crea tus listas 
                 p Podrás crear listas que incluirán productos, recados, tareas... y compartirlas con otros usuarios, así como eliminarlas.
             .carousel-item.slider-2
