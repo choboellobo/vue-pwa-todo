@@ -16,8 +16,17 @@
         @extend .horizontal-center;
         @extend .flex-column;
         color: white;
-        &.slider-1{
-            @include background("src/static/img/icons/slider1.png",#c75c5c);
+        &.slide1{
+            background-color: #c75c5c;
+        }
+        &.slide2{
+            background-color:  #e0995e;
+        }
+        &.slide3{
+            background-color:  #4e5c73;
+        }
+        img{
+            max-width: 200px;
         }
         h5{
             text-align: center;
