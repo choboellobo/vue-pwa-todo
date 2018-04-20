@@ -30,7 +30,8 @@ export default {
         this.setUserData(user);
       } else {
         this.setUserData(null)
-        this.$router.push({name: 'Login'})
+        if(this.$localStorage.get('tutorial')) this.$router.push({name: 'Login'})
+        else this.$router.push({name: 'getStarted'})
       }
     })
   },
@@ -70,6 +71,7 @@ export default {
   @import url('../node_modules/materialize-css/dist/css/materialize.css');
   @import url('../node_modules/animate.css/animate.css');
   @import 'helpers';
+  @import 'mixin';
   //global styles
   body{
     height: 100vh;

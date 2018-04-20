@@ -1,8 +1,8 @@
 <template lang="pug">
   div
     Navbar.hide-buttons-right(:title="title" :backButton="true")
-    div.margin-top-1(v-if="wallet")
-      .row(v-if="wallet.tasks")
+    div.margin-top-1
+      .row(v-if="wallet && wallet.tasks")
         .col.s12
           ul.collection
             li.collection-item(v-for="($task, key) in tasksOrdered")
@@ -15,16 +15,16 @@
                 li
                   a(@click="removeTask($task.key)") Eliminar                    
     //outviewport
-    Loading(v-if="!wallet")
+    Loading(v-if="loading")
     // Fabs
     Fab.right-top-edge
-      a.btn-floating.blue.darken-1(@click="addItemListModal.open(); $refs.inputTask.focus(); task.name = ''")
+      button.btn-floating.blue.darken-1(id="productListAdd" @click="addItemListModal.open(); $refs.inputTask.focus(); task.name = ''")
         i.large.material-icons add
     Fab( v-if="wallet && wallet.tasks")
-      a.btn-floating.btn-large.red(@click="removeAllTasks")
+      button.btn-floating.btn-large.red(@click="removeAllTasks")
         i.large.material-icons delete_forever
     // EmptyContent
-    EmptyContent(v-if="wallet && !wallet.tasks" icon="add" text="Haz clik en el icono + para añadir productos a tu lista")
+    EmptyContent(v-if="wallet && !wallet.tasks && !loading" icon="add" text="Haz clik en el icono + para añadir productos a tu lista")
     // Modal
     Modal(@mounted="addItemListModal = $event")
       div.input-field(slot="content")
@@ -34,6 +34,12 @@
         button.modal-action.modal-close.waves-effect.waves-green.btn-flat CANCELAR
         button.modal-action.waves-effect.waves-green.btn-flat(v-if="editKey" :disabled="canAddTask" @click="editTaskName") EDITAR
         button.modal-action.waves-effect.waves-green.btn-flat(v-else :disabled="canAddTask" @click="addTask") ACEPTAR
+    FeatureDiscovery(
+        @close-feature-discovery="closeFeatureDiscovery" 
+        @mounted="featureDiscovery = $event" 
+        title="Añade productos" 
+        content="Aquí podrás añadir los productos a tu cesta" 
+        target="productListAdd")
 </template>
 <script>
 import {mapGetters, mapMutations} from 'vuex';
@@ -43,14 +49,17 @@ import { pushNotification } from '../../App';
 export default {
   data() {
     return {
+      loading: true,
       db: null,
-      wallet: null,
+      wallet: {},
       addItemListModal: null,
       task: {completed: false, name: ''},
-      editKey: null
+      editKey: null,
+      featureDiscovery: null
     }
   },
   computed: {
+    ...mapGetters(['getFeatureDiscovery']),
     canAddTask() {
             return this.task.name.length === 0
     },
@@ -72,16 +81,28 @@ export default {
     }
   },
   mounted(){
+    // Feature Discovery
+    let $featureDiscovery  = this.getFeatureDiscovery
+    if(!$featureDiscovery || !$featureDiscovery.productsList) {
+      this.featureDiscovery.open();
+    }
     // Observable for pushNotification;
     pushNotification.subscribe(console.log);
 
-    this.db = this.$firebase.database();
+    this.db = this.$firebase.database()
+  
     this.db.ref('/wallets/'+ this.$route.params.key)
-            .on('value', snapshot => {
-                this.wallet = snapshot.val()
+           .on('value', snapshot => {
+               this.wallet = snapshot.val()
+               this.loading = false
             })
+    
   },
   methods: {
+      ...mapMutations(['updateFeatureDiscovery']),
+      closeFeatureDiscovery() {
+        this.updateFeatureDiscovery({key: 'productsList'})
+      },
       openModalEdit(task) {
         this.task.name = task.name;
         this.editKey = task.key;

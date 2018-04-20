@@ -6,6 +6,7 @@ const Login = () => import('../pages/login/login')
 const Main = () => import('../pages/main/main')
 const ProductsList = () => import('../pages/products-list/products-list')
 const AddWalletUserPage = () => import('../pages/AddWalletUserPage')
+const Tutorial = () => import('../pages/tutorial/tutorial')
 
 Vue.use(Router)
 
@@ -19,6 +20,11 @@ export default new Router({
     {
       path: '/',
       redirect: '/main'
+    },
+    {
+      path: '/getstarted',
+      name: 'getStarted',
+      component: Tutorial
     },
     {
       path: '/login',
