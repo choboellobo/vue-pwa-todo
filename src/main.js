@@ -7,6 +7,9 @@ import router from './router'
 import Rx from 'rxjs/Rx'
 import VueRx from 'vue-rx'
 Vue.use(VueRx, Rx)
+// LocalStorage
+import VueLocalStorage from 'vue-localstorage'
+Vue.use(VueLocalStorage)
 
 // Materialize
 import materialize from 'materialize-css';

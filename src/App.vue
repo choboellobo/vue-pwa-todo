@@ -30,7 +30,8 @@ export default {
         this.setUserData(user);
       } else {
         this.setUserData(null)
-        this.$router.push({name: 'getStarted'})
+        if(this.$localStorage.get('tutorial')) this.$router.push({name: 'Login'})
+        else this.$router.push({name: 'getStarted'})
       }
     })
   },
