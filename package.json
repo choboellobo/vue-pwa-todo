@@ -10,7 +10,7 @@
     "build": "node build/build.js",
     "e2e": "node test/e2e/runner.js",
     "test": "npm run e2e",
-    "postinstall": "npm run build"
+    "postinstall": "npm install && npm run build"
   },
   "dependencies": {
     "animate.css": "^3.6.1",
